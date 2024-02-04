@@ -2,8 +2,27 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Users;
-use App\Http\Controllers\UsersController;
+//use App\Http\Controllers\UserController;
 
+
+//Models to connect to DB, HTTP client
+use  App\Http\Controllers\UserController;
+
+//Sessions
+use App\Http\Controllers\UserAuth;
+
+//Flash
+use App\Http\Controllers\AddMember;
+
+//Upload 
+use App\Http\Controllers\UploadController;
+
+// Show from database
+use App\Http\Controllers\MemberController;
+
+//Pagination
+// Show from database
+use App\Http\Controllers\MembersController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,8 +62,12 @@ Route::get('/', function () {
 Route::view('home', 'home');
 Route::view('contact', 'contact');
 Route::view('about', 'about');
-Route::view('users', 'users');
+
+// Route middleware
+//Route::view('users', 'users')->middleware('protectedPage');
 Route::view('noaccess', 'noaccess');
+
+
 // Call Contrller
 // 1. write 'use App\Http\Controllers\Users;' above to use controller and it's functions.
 
@@ -63,10 +86,58 @@ Route::view('noaccess', 'noaccess');
 // Group Middleware
 Route::group(['middleware' => ['protectedPage']], function(){
     Route::view('about', 'about');
-    Route::view('users' , [UsersController::class, 'getData']);
+    //Route::post('users' , [UsersController::class, 'getData']);
 });
 
 
+// Database Connection using Controller
+//  Route::get('users', [UserController::class, 'index']);
+
+//Database Connection using Models, HTTP client
+//Route::get('users', [UserController::class, 'index']);
+
+//HTTP request Methods
+Route::delete("users", [UserController::class, 'testRequest']);
+// Route::view('login', 'user');
 
 
-// Route::view('users', 'users');
+//Sessions
+Route::post('user', [UserAuth::class, 'userLogin']);
+//Route::view('login', 'login');
+
+Route::view('profile', 'profile');
+
+Route::get('/login', function() {
+    if (session()->has('user')){
+        return redirect('profile');
+    }
+    return view('login');
+});
+
+Route::get('/logout', function() {
+    if (session()->has('user')){
+        session()->pull('user');
+    }
+    return redirect('login');
+});
+
+
+//Flash Sessions
+Route::view('add', 'add');
+Route::post('addmember', [AddMember::class, 'add']);
+
+//Upload a file
+Route::view('upload', 'upload');
+Route::post('uploadedfile', [UploadController::class, 'index']);
+
+// Localization - to change languages
+Route::get('/profile/{lang}', function ($lang) {
+    App::setlocale($lang);
+    return view('profile');
+});
+
+// Show From Db
+//Route::get('list', [MemberController::class, 'show']);
+
+//pagination
+Route::get('list', [MembersController::class, 'show']);
