@@ -17,12 +17,21 @@ use App\Http\Controllers\AddMember;
 //Upload 
 use App\Http\Controllers\UploadController;
 
-// Show from database
+// Show from database  && Add data in db (crud)
 use App\Http\Controllers\MemberController;
 
 //Pagination
 // Show from database
 use App\Http\Controllers\MembersController;
+
+
+// DB query builder
+use App\Http\Controllers\Members;
+
+// Joins
+use App\Http\Controllers\EmployeeController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -123,8 +132,8 @@ Route::get('/logout', function() {
 
 
 //Flash Sessions
-Route::view('add', 'add');
-Route::post('addmember', [AddMember::class, 'add']);
+// Route::view('add', 'add');
+// Route::post('addmember', [AddMember::class, 'add']);
 
 //Upload a file
 Route::view('upload', 'upload');
@@ -140,4 +149,33 @@ Route::get('/profile/{lang}', function ($lang) {
 //Route::get('list', [MemberController::class, 'show']);
 
 //pagination
-Route::get('list', [MembersController::class, 'show']);
+//Route::get('list', [MembersController::class, 'show']);
+
+// CRUD Db -add
+Route::view('add', 'addmember' );
+Route::post('add', [MemberController::class, 'addData'] );
+
+// CRUD Db - delete
+Route::get('list', [MemberController::class, 'list']);
+Route::get('delete/{id}', [MemberController::class, 'delete']);
+
+// CRUD Db - Update
+Route::get('edit/{id}', [MemberController::class, 'edit']);
+Route::post('edit', [MemberController::class, 'update']);
+
+
+// Db QUery Builder
+Route::get('lists', [Members::class, 'dbOperation'] );
+
+
+//Agggregate Queries
+//Route::get('list', [MemberController::class, 'operations']);
+
+//Joins
+Route::get('show', [EmployeeController::class, 'show']);
+
+//Accessors
+//Route::get('members', [MemberController::class, 'index']);
+
+// Mutators
+Route::get('members', [MemberController::class, 'index']);

@@ -8,7 +8,11 @@ use App\Models\User;
 class MembersController extends Controller
 {
     function show() {
-        $data = User::all();
+        //show all db data
+        // $data = User::all();
+
+        // paginate Data
+        $data = User::paginate(5);
         return view('list', ['users' => $data]);
     }
 }
