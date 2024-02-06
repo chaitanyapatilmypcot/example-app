@@ -16,15 +16,19 @@ class User extends Model
     public $timestamps = false;
 
     //Accessors
-    public function getAddressAttribute($value) {
-        return $value . ', India';
-    }
+    // public function getAddressAttribute($value) {
+    //     return $value . ', India';
+    // }
 
-    public function setNameAttribute($value) {
-         $this->attributes['name'] = 'Mr ' . $value;
-    }
+    // public function setNameAttribute($value) {
+    //      $this->attributes['name'] = 'Mr ' . $value;
+    // }
 
-    public function setAddressAttribute($value) {
-        $this->attributes['address'] = $value . ", India";
-   }
+//     public function setAddressAttribute($value) {
+//         $this->attributes['address'] = $value . ", India";
+//    }
+
+//    public function setPersonalityAttribute($value) {
+//     $this->attributes['personality'] = $value
+//    }
 }
