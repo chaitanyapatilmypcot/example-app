@@ -32,6 +32,19 @@ use App\Http\Controllers\Members;
 use App\Http\Controllers\EmployeeController;
 
 
+//Fluent Str
+// use Illuminate\Support\Str;
+// $data ="hi, let's learn Laravel";
+
+// $data = Str::of($data)->ucfirst($data)->replaceFirst("Hi", "Hello", $data)->camel($data);
+
+// Route Binding
+
+use App\Http\Controllers\CompanyController;
+
+// Multiple connection
+use App\Http\Controllers\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -179,3 +192,15 @@ Route::get('show', [EmployeeController::class, 'show']);
 
 // Mutators
 Route::get('members', [MemberController::class, 'index']);
+
+// Relations
+
+//One-to-One
+//Route::get('data', [MemberController::class, 'index']);
+
+
+//Route Binding
+Route::get('company/{key}', [CompanyController::class, 'index']);
+
+//Multiple Connection
+//Route::get('product', [ProductController::class, 'index']);

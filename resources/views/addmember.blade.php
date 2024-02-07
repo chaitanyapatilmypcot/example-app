@@ -1,5 +1,10 @@
 @include('links')
 
+<?php
+$personality =  ['Calm','Team Work','Fit & Fine'];
+$drinks = ['Tea', 'Coffee'];
+?>
+
 <figure class="text-center">
     <blockquote class="blockquote">
       <p>Add Member</p>
@@ -8,7 +13,7 @@
 
 {{-- Flash session --}}
 @if (session('user'))
-<p class="alert alert-success" id="myAlert">{{session('user')}} user has been added successfully</p>   
+    <p class="alert alert-success" id="myAlert">{{session('user')}} user has been added successfully</p>   
 @endif
 
 <div class="container">
@@ -52,25 +57,30 @@
         </div>
     
         <div class="mb-3">
-            <label for="personality" class="form-label">Enter your personality</label>
-            <input type="checkbox" name="personality[]" value="Calm" class="form-check-input">Calm 
-            <input type="checkbox" name="personality[]" value="Team Work" class="form-check-input">Team Work 
+            <label for="personality" class="form-label">Enter your personality :</label> <br>
+
+                @foreach ($personality as $item)
+                    <input type="checkbox" id="{{$item}}" name="personality[]" value="{{$item}}" class="form-check-input" ><label for="{{$item}}">{{$item}}</label>
+                @endforeach
+                
             <span style="color: red">@error('personality'){{$message}}@enderror</span> 
         </div>
         
         <div class="mb-3">
-            <label for="drink" class="form-label">Enter your Favorite Drink</label>
-            <input type="radio" name="drink" value="tea" class="form-check-input mr-10">Tea 
-            <input type="radio" name="drink" value="coffee" class="form-check-input">Coffee 
-            <input type="radio" name="drink" value="none" class="form-check-input">Better Working 
+            <label for="drink" class="form-label">Enter your Favorite Drink :</label> <br>
+
+                @foreach ($drinks as $item)
+                    <input type="radio" id="{{$item}}" name="drink" value="{{$item}}" class="form-check-input mr-10"?> <label for="{{$item}}">{{$item}}</label> 
+                @endforeach
+               
             <span style="color: red">@error('drink'){{$message}}@enderror</span> 
         </div>
     
+
+
         <button type="submit" class="btn btn-outline-success">Add member</button>
-    
-    
-        
-            <a href="/list" class="btn btn-outline-primary">Show All Members</a>
+
+        <a href="/list" class="btn btn-outline-primary">Show All Members</a>
         
     </form>
 </div>

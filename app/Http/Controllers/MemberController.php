@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 
+//Relations Db (employees)
+use App\Models\Employee;
+
 class MemberController extends Controller
 {
     
@@ -51,21 +54,22 @@ class MemberController extends Controller
         return redirect('add');
     }
 
+    // Show data
     function list() {
         $data = User::paginate(10);
         return view('list', ['users' => $data]);
     }
 
+    //Delete Data
     function delete($id) {
         $data = User::find($id);
         $data->delete();
         
-        
-        // flash user deleted sucessfully
+        // flash user deleted sucessfully passs username with 'with'
         return redirect('list')->with('user', $data['name']);
-
     }
 
+    //Edit the data
     function edit($id) {
         $data = User::find($id);
         $data->personality = explode(',' , $data->personality);
@@ -76,6 +80,7 @@ class MemberController extends Controller
 
     }
 
+    // After editing Update the data
     function update(Request $req) {
         // return $req->input();
         $data = User::find($req->id);
@@ -92,20 +97,22 @@ class MemberController extends Controller
     }
 
 
-
+    // Aggregate Functions
     function operations(){
         return DB::table('users')->max('name');
         //sum, max, min ,avg, sum
     }
 
+
     function index(){
         // return User::all();
 
-        $user = new User;
-        $user->name= 'John';
-        $user->email= 'John@gmail.com';
-        $user->address= 'noida';
-        $user->save();
+        // $user = new User;
+        // $user->name= 'John';
+        // $user->email= 'John@gmail.com';
+        // $user->address= 'noida';
+        // $user->save();
+        return Employee::find(2)->getCompany;
 
     }
 }

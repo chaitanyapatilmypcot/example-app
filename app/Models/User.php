@@ -20,12 +20,23 @@ class User extends Model
     //     return $value . ', India';
     // }
 
+
+    //Mutator
     // public function setNameAttribute($value) {
-    //      $this->attributes['name'] = 'Mr ' . $value;
+    //     if(substr($value, 0, 3) == 'Mr.'){
+    //         $this->attributes['name'] = $value;
+    //     } else {
+    //         $this->attributes['name'] = 'Mr ' . $value;
+    //     }    
     // }
 
+    
 //     public function setAddressAttribute($value) {
-//         $this->attributes['address'] = $value . ", India";
+//         if(substr($value, -1, 6) == ',India'){
+//             $this->attributes['address'] = $value;
+//         } else {
+//             $this->attributes['address'] = $value . ", India";
+//         }   
 //    }
 
 //    public function setPersonalityAttribute($value) {
