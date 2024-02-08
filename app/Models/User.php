@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+//API auth using sanctum
+use Laravel\Sanctum\HasApiTokens;
+
 class User extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory;
 
     // to define which Db name it should refer, you can manually give 
     //public $table ="employee";

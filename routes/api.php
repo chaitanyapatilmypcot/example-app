@@ -4,7 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dummyAPI;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\FileController;
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TestController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -40,4 +43,16 @@ Route::get('search/{name}', [ProductController::class, 'search']);
 Route::post('save', [ProductController::class, 'testData']);
 
 //API Resource 
-Route::apiResource('member', [MemberController::class, 'test']);
+//Route::apiResource('member', [MemberController::class, 'test']);
+
+//File Upload 
+Route::post('upload', [FileController::class, 'upload']);
+
+// Group route to have authorization
+Route::group(['middleware' => 'auth:sanctum'], function() {
+    //Put the route to which you want to have auth
+    Route::get('test', [TestController::class, 'index']);
+});
+
+//API auth with Sanctum
+Route::post('login', [UserController::class, 'login']);
