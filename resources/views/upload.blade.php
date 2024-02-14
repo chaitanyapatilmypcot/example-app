@@ -3,5 +3,5 @@
 
     @csrf
     <input type="file" name="file"> <br> <br>
-    <button type="submit">Upload File</button>
+    <button type="submit">Upload Image</button>
 </form>

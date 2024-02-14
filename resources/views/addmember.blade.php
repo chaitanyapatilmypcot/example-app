@@ -13,7 +13,10 @@ $drinks = ['Tea', 'Coffee'];
 
 {{-- Flash session --}}
 @if (session('user'))
-    <p class="alert alert-success" id="myAlert">{{session('user')}} user has been added successfully</p>   
+    <p class="alert alert-success" id="myAlert">
+        
+        {{session('user')}} user has been added successfully
+    </p>   
 @endif
 
 <div class="container">

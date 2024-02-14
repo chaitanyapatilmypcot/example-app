@@ -2,7 +2,7 @@
 
 {{-- flash session --}}
 @if (session('user'))
-<h3 style="color : green">{{session('user')}} user has been added</h3>   
+<h3 style="color : green">{{session('user')}}'s user has been added</h3>   
 @endif
 
 <form action="addmember" method="POST">

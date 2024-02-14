@@ -8,11 +8,11 @@
   </figure>
 
 @if (session('user')) 
-    <p class="alert alert-danger" id="myAlert">{{session('user')}} your data has been Deleted successfuly</p>
+    <p class="alert alert-danger" id="myAlert">{{session('user')}}'s data has been Deleted successfuly</p>
 @endif
 
 @if (session('edit'))
-    <p class="alert alert-success" id="myAlert">{{session('edit')}} your data has been updated sucessfully</p>    
+    <p class="alert alert-success" id="myAlert">{{session('edit')}}'s data has been updated sucessfully</p>    
 @endif
 
 <table class="table table-striped table-hover">
